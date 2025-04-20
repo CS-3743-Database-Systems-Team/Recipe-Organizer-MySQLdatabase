@@ -16,23 +16,23 @@ DROP TABLE IF EXISTS Ingredients;
 -- Table: Ingredients
 -- ================================================
 CREATE TABLE IF NOT EXISTS Ingredients (
-    ingredient_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL UNIQUE
+    'ingredient_id' INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    'name' VARCHAR(255) NOT NULL UNIQUE
 ) COMMENT 'Stores individual ingredients available for recipes.';
 
 -- ================================================
 -- Table: Recipes
 -- ================================================
 CREATE TABLE IF NOT EXISTS Recipes (
-    recipe_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(500) NOT NULL,
-    discription TEXT DEFAULT NULL,
-    category VARCHAR(500) NOT NULL,
-    cuisine VARCHAR(500) NOT NULL,
-    cooking_time INT NOT NULL,
-    difficulty ENUM('easy', 'medium', 'hard') DEFAULT NULL,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+ `recipe_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ `title` varchar(500) NOT NULL,
+ `discription` text DEFAULT NULL,
+ `category` varchar(500) NOT NULL,
+ `cuisine` varchar(500) NOT NULL,
+ `cooking_time` int NOT NULL,
+ `difficulty` enum('easy', 'medium', 'hard') DEFAULT NULL,
+ `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) COMMENT 'Stores basic recipe information.';
 
 CREATE INDEX index_1 ON Recipes (`title`);
@@ -41,67 +41,67 @@ CREATE INDEX index_1 ON Recipes (`title`);
 -- Table: Restaurants
 -- ================================================
 CREATE TABLE IF NOT EXISTS Restaurants (
-    restaurant_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(500) NOT NULL,
-    address VARCHAR(500) NOT NULL,
-    city VARCHAR(500) NOT NULL,
-    state VARCHAR(500) NOT NULL,
-    zip_code VARCHAR(500) NOT NULL,
-    phone VARCHAR(500) NOT NULL,
-    rating DECIMAL(3,2) NOT NULL
+ `restaurant_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ `name` varchar(500) NOT NULL,
+ `address` varchar(500) NOT NULL,
+ `city` varchar(500) NOT NULL,
+ `state` varchar(500) NOT NULL,
+ `zip_code` varchar(500) NOT NULL,
+ `phone` varchar(500) NOT NULL,
+ `rating` decimal(3,2) NOT NULL
 ) COMMENT 'Contains data about restaurants that may offer recipes or menu items.';
 
 -- ================================================
 -- Table: Users
 -- ================================================
 CREATE TABLE IF NOT EXISTS Users (
-    user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(500) NOT NULL,
-    email VARCHAR(500) NOT NULL UNIQUE,
-    password_hash VARCHAR(500) NOT NULL,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+ `user_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ `username` varchar(500) NOT NULL,
+ `email` varchar(500) NOT NULL UNIQUE,
+ `password_hash` varchar(500) NOT NULL,
+ `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) COMMENT 'This table stores user account details.';
 
 -- ================================================
 -- Table: Instructions
 -- ================================================
 CREATE TABLE IF NOT EXISTS Instructions (
-    instruction_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    recipe_id INT NOT NULL,
-    step_number INT NOT NULL,
-    instruction_text TEXT DEFAULT NULL
+ `instruction_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ `recipe_id` int NOT NULL,
+ `step_number` int NOT NULL,
+ `instruction_text` text DEFAULT NULL
 ) COMMENT 'Stores the step-by-step instructions for each recipe.';
 
 -- ================================================
 -- Table: RecipeIngredients
 -- ================================================
 CREATE TABLE IF NOT EXISTS RecipeIngredients (
-    recipe_id INT NOT NULL,
-    ingredient_id INT NOT NULL,
-    quantity DECIMAL(5,2) NOT NULL,
-    PRIMARY KEY (recipe_id, ingredient_id)
+ `recipe_id` int NOT NULL,
+ `ingredient_id` int NOT NULL,
+ `quantity` decimal(5,2) NOT NULL,
+ PRIMARY KEY (`recipe_id`, `ingredient_id`)
 ) COMMENT 'A join table that links recipes to their ingredients, along with the required quantity.';
 
 -- ================================================
 -- Table: RestaurantMenus
 -- ================================================
 CREATE TABLE IF NOT EXISTS RestaurantMenus (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    restaurant_id INT NOT NULL,
-    recipe_id INT NOT NULL,
-    price DECIMAL(5,2) NOT NULL
+ `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ `restaurant_id` int NOT NULL,
+ `recipe_id` int NOT NULL,
+ `price` decimal(5,2) NOT NULL
 ) COMMENT 'Links restaurants to recipes they offer as menu items, along with pricing.';
 
 -- ================================================
 -- Table: UserRatings
 -- ================================================
 CREATE TABLE IF NOT EXISTS UserRatings (
-    rating_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    recipe_id INT NOT NULL,
-    user_id INT NOT NULL,
-    rating TINYINT NOT NULL,
-    review_text TEXT DEFAULT NULL,
-    rating_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+ `rating_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ `recipe_id` int NOT NULL,
+ `user_id` int NOT NULL,
+ `rating` tinyint NOT NULL,
+ `review_text` text DEFAULT NULL,
+ `rating_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) COMMENT 'Holds user ratings and optional reviews for recipes.';
 
 
